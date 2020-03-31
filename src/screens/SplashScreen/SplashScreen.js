@@ -3,6 +3,8 @@ import {
   View,
   Text,
   StyleSheet,
+  SafeAreaView,
+  Image,
 } from 'react-native';
 
 const SplashScreen = ({ navigation }) => {
@@ -15,11 +17,16 @@ const SplashScreen = ({ navigation }) => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <Image
+        style={styles.logo}
+        source={require('../../assets/clapperboard.png')}
+      />
+
       <Text style={styles.title}>
         Kinoisseur
       </Text>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -36,7 +43,12 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
     fontSize: 55,
     color: '#ff2e63',
-  }
+  },
+
+  logo: {
+    width: 100,
+    height: 100,
+  },
 
 });
 
