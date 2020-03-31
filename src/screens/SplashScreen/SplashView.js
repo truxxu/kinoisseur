@@ -7,7 +7,7 @@ import {
   Image,
   Animated
 } from 'react-native';
-import logo from '../../assets/clapperboard.png'
+import logo from '../../assets/film-reel.png'
 
 const SplashView = (props) => {
 
