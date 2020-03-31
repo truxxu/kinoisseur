@@ -1,31 +1,54 @@
-import React, { useEffect }  from 'react';
+import React, { useEffect, useRef }  from 'react';
 import {
   View,
   Text,
   StyleSheet,
   SafeAreaView,
   Image,
+  Animated
 } from 'react-native';
+import logo from '../../assets/clapperboard.png'
 
 const SplashScreen = ({ navigation }) => {
 
   useEffect(() => {
+    fadeIn();
     const timer = setTimeout(() => {
-      navigation.navigate('Home')
+      navigation.navigate('Home');
     }, 3000);
     return () => clearTimeout(timer);
   }, []);
 
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+
+  const fadeIn = () => {
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 2000,
+      useNativeDriver: true
+    }).start();
+  };
+
+
   return (
     <SafeAreaView style={styles.container}>
-      <Image
-        style={styles.logo}
-        source={require('../../assets/clapperboard.png')}
-      />
+      <Animated.View
+        style={[
+          styles.fadingView,
+          {
+            opacity: fadeAnim
+          }
+        ]}
+      >
+        <Image
+          style={styles.logo}
+          source={logo}
+        />
 
-      <Text style={styles.title}>
-        Kinoisseur
-      </Text>
+        <Text style={styles.title}>
+          Kinoisseur
+        </Text>
+      </Animated.View>
     </SafeAreaView>
   );
 }
@@ -36,6 +59,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#08d9d6'
+  },
+
+  fadingView: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   title: {
@@ -49,7 +77,6 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
   },
-
 });
 
 export default SplashScreen;
