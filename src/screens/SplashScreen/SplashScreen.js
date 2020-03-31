@@ -1,11 +1,8 @@
-import React, { useEffect, useRef }  from 'react';
-import {
-  Animated
-} from 'react-native';
-import SplashView from './SplashView'
+import React, {useEffect, useRef} from 'react';
+import {Animated} from 'react-native';
+import SplashView from './SplashView';
 
-const SplashScreen = ({ navigation }) => {
-
+const SplashScreen = ({navigation}) => {
   useEffect(() => {
     fadeIn();
     const timer = setTimeout(() => {
@@ -20,13 +17,11 @@ const SplashScreen = ({ navigation }) => {
     Animated.timing(fadeAnim, {
       toValue: 1,
       duration: 2000,
-      useNativeDriver: true
+      useNativeDriver: true,
     }).start();
   };
 
-  return (
-    <SplashView animation={fadeAnim} />
-  );
-}
+  return <SplashView animation={fadeAnim} />;
+};
 
 export default SplashScreen;
