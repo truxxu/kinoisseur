@@ -6,7 +6,7 @@ const SplashScreen = ({navigation}) => {
   useEffect(() => {
     fadeIn();
     const timer = setTimeout(() => {
-      navigation.navigate('Home');
+      navigation.navigate('DrawerNav', {screen: 'Home'});
     }, 3000);
     return () => clearTimeout(timer);
   }, []);
