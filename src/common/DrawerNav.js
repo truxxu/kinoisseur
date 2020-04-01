@@ -22,9 +22,9 @@ const DrawerNav = (props) => {
       drawerContent={CustomDrawer}
       drawerStyle={styles.drawerStyle}
       drawerContentOptions={{
-        activeTintColor: '#ff2e63',
-        activeBackgroundColor: 'yellow',
+        activeTintColor: '#252a34',
         itemStyle: styles.itemStyle,
+        labelStyle: styles.labelStyle,
       }}>
       <Stack.Screen
         name="Home"
@@ -33,18 +33,22 @@ const DrawerNav = (props) => {
       />
       <Stack.Screen name="Favourites" component={FavouritesScreen} />
       <Stack.Screen name="History" component={HistoryScreen} />
-      <Stack.Screen name="WathcList" component={WatchListScreen} />
+      <Stack.Screen name="WatchList" component={WatchListScreen} />
     </Drawer.Navigator>
   );
 };
 
 const styles = StyleSheet.create({
   drawerStyle: {
-    backgroundColor: '#08d9d6',
-    width: 240,
+    backgroundColor: '#eaeaea',
+    width: 300,
   },
   itemStyle: {
     marginVertical: 5,
+  },
+  labelStyle: {
+    color: '#252a34',
+    fontWeight: 'bold',
   },
 });
 
