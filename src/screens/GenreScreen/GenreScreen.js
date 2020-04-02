@@ -1,17 +1,22 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, SafeAreaView} from 'react-native';
 
-const GenreScreen = (props) => {
+import Navbar from '../../common/Navbar';
+
+const GenreScreen = ({navigation}) => {
   return (
-    <View style={styles.container}>
-      <Text>GenreScreen</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <Navbar navigation={navigation} />
+      <View style={styles.container}>
+        <Text>GenreScreen</Text>
+      </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 9,
     alignItems: 'center',
     justifyContent: 'center',
   },

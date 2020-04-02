@@ -1,17 +1,22 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, SafeAreaView} from 'react-native';
 
-const HistoryScreen = (props) => {
+import Navbar from '../../common/Navbar';
+
+const HistoryScreen = ({navigation}) => {
   return (
-    <View style={styles.container}>
-      <Text>HistoryScreen</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <Navbar navigation={navigation} _title="History" _back={true} />
+      <View style={styles.container}>
+        <Text>HistoryScreen</Text>
+      </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 9,
     alignItems: 'center',
     justifyContent: 'center',
   },

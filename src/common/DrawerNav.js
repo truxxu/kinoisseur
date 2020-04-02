@@ -15,7 +15,7 @@ const screenOptions = {
   headerShown: false,
 };
 
-const DrawerNav = (props) => {
+const DrawerNav = ({navigation}) => {
   return (
     <Drawer.Navigator
       initialRouteName="Home"
