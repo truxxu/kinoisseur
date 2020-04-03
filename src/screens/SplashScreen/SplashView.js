@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  Text,
-  StyleSheet,
-  SafeAreaView,
-  Image,
-  Animated,
-} from 'react-native';
+import {Text, StyleSheet, SafeAreaView, Image, Animated} from 'react-native';
 import logo from '../../assets/film-reel.png';
 
 const SplashView = (props) => {

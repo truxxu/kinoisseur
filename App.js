@@ -3,12 +3,15 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
+import DrawerNav from './src/common/DrawerNav';
 import SplashScreen from './src/screens/SplashScreen/SplashScreen';
-import HomeScreen from './src/screens/HomeScreen/HomeScreen';
 import GenreScreen from './src/screens/GenreScreen/GenreScreen';
 import MovieScreen from './src/screens/MovieScreen/MovieScreen';
 
 const Stack = createStackNavigator();
+const screenOptions = {
+  headerShown: false,
+};
 
 const App: () => React$Node = () => {
   return (
@@ -17,11 +20,23 @@ const App: () => React$Node = () => {
         <Stack.Screen
           name="Splash"
           component={SplashScreen}
-          options={{headerShown: false}}
+          options={screenOptions}
         />
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Genre" component={GenreScreen} />
-        <Stack.Screen name="Movie" component={MovieScreen} />
+        <Stack.Screen
+          name="DrawerNav"
+          component={DrawerNav}
+          options={screenOptions}
+        />
+        <Stack.Screen
+          name="Genre"
+          component={GenreScreen}
+          options={screenOptions}
+        />
+        <Stack.Screen
+          name="Movie"
+          component={MovieScreen}
+          options={screenOptions}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

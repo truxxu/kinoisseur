@@ -3,12 +3,12 @@ import {View, Text, StyleSheet, SafeAreaView} from 'react-native';
 
 import Navbar from '../../common/Navbar';
 
-const MovieScreen = ({navigation}) => {
+const FavouritesScreen = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
-      <Navbar navigation={navigation} _title="Movie" _back={true} />
+      <Navbar navigation={navigation} _title="My Favourites" _back={true} />
       <View style={styles.container}>
-        <Text>MovieScreen</Text>
+        <Text>FavouritesScreen</Text>
       </View>
     </SafeAreaView>
   );
@@ -22,4 +22,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MovieScreen;
+export default FavouritesScreen;
