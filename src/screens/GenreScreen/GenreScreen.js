@@ -3,10 +3,13 @@ import {View, Text, StyleSheet, SafeAreaView, Button} from 'react-native';
 
 import Navbar from '../../common/Navbar';
 
-const GenreScreen = ({navigation}) => {
+const GenreScreen = ({navigation, route}) => {
+  const {_title} = route.params;
+  let title = _title || '';
+
   return (
     <SafeAreaView style={styles.container}>
-      <Navbar navigation={navigation} _title="Genre" _back={true} />
+      <Navbar navigation={navigation} _title={title} _back={true} />
       <View style={styles.container}>
         <Text>GenreScreen</Text>
         <Button

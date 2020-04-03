@@ -1,19 +1,17 @@
 import React from 'react';
-import {View, Text, StyleSheet, SafeAreaView, Button} from 'react-native';
+import {View, StyleSheet, SafeAreaView, ScrollView} from 'react-native';
 
 import Navbar from '../../common/Navbar';
+import GenreCard from '../../common/GenreCard';
 
 const HomeScreen = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <Navbar navigation={navigation} _title="Kinoisseur" />
-      <View style={styles.container}>
-        <Text>HomeScreen</Text>
-        <Button
-          onPress={() => navigation.navigate('Genre')}
-          title="Learn More"
-          color="#841584"
-        />
+      <View style={styles.content}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <GenreCard navigation={navigation} _title="Action" />
+        </ScrollView>
       </View>
     </SafeAreaView>
   );
@@ -24,6 +22,10 @@ const styles = StyleSheet.create({
     flex: 9,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  content: {
+    flex: 8,
+    padding: 5,
   },
 });
 
