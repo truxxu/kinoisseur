@@ -1,17 +1,22 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, SafeAreaView} from 'react-native';
 
-const MovieScreen = (props) => {
+import Navbar from '../../common/Navbar';
+
+const MovieScreen = ({navigation}) => {
   return (
-    <View style={styles.container}>
-      <Text>MovieScreen</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <Navbar navigation={navigation} _title="Movie" _back={true} />
+      <View style={styles.container}>
+        <Text>MovieScreen</Text>
+      </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 9,
     alignItems: 'center',
     justifyContent: 'center',
   },

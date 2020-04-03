@@ -5,6 +5,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import DrawerNav from './src/common/DrawerNav';
 import SplashScreen from './src/screens/SplashScreen/SplashScreen';
+import GenreScreen from './src/screens/GenreScreen/GenreScreen';
+import MovieScreen from './src/screens/MovieScreen/MovieScreen';
 
 const Stack = createStackNavigator();
 const screenOptions = {
@@ -23,6 +25,16 @@ const App: () => React$Node = () => {
         <Stack.Screen
           name="DrawerNav"
           component={DrawerNav}
+          options={screenOptions}
+        />
+        <Stack.Screen
+          name="Genre"
+          component={GenreScreen}
+          options={screenOptions}
+        />
+        <Stack.Screen
+          name="Movie"
+          component={MovieScreen}
           options={screenOptions}
         />
       </Stack.Navigator>
