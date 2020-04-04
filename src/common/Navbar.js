@@ -48,19 +48,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#08d9d6',
     paddingLeft: 15,
   },
-
   text: {
     marginLeft: 20,
     color: '#eaeaea',
     fontWeight: 'bold',
     fontSize: 20,
   },
-
   logo: {
     width: 20,
     height: 20,
   },
-
   button: {
     width: 25,
     height: 25,
