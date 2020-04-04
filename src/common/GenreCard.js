@@ -1,15 +1,23 @@
 import React from 'react';
-import {Text, StyleSheet, Dimensions, TouchableOpacity} from 'react-native';
+import {
+  Text,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 
 const WIDTH = Dimensions.get('window').width;
 
-const GenreCard = ({navigation, _title}) => {
-  let title = _title || '';
+const GenreCard = ({navigation, _title, _url}) => {
+  let title = _title || '',
+    url = _url || '';
 
   return (
     <TouchableOpacity
       style={styles.container}
       onPress={() => navigation.navigate('Genre', {_title: title})}>
+      <Image style={styles.logo} source={{uri: url}} />
       <Text style={styles.text}>{title}</Text>
     </TouchableOpacity>
   );
@@ -17,11 +25,9 @@ const GenreCard = ({navigation, _title}) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#08d9d6',
+    backgroundColor: '#252a34',
     alignItems: 'center',
     justifyContent: 'center',
-    width: WIDTH * 0.4,
-    height: 75,
     borderRadius: 20,
     margin: 7.5,
     shadowColor: '#000',
@@ -39,6 +45,18 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
     fontSize: 20,
     color: '#eaeaea',
+    position: 'absolute',
+    top: 20,
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 10,
+  },
+
+  logo: {
+    width: WIDTH * 0.4,
+    height: 75,
+    borderRadius: 20,
+    opacity: 0.75,
   },
 });
 

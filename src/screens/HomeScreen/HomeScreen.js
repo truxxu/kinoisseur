@@ -40,7 +40,12 @@ const HomeScreen = ({navigation}) => {
   const generateCards = () => {
     const cards = data.map((item, idx) => {
       return (
-        <GenreCard key={idx} navigation={navigation} _title={item.title} />
+        <GenreCard
+          key={idx}
+          navigation={navigation}
+          _title={item.title}
+          _url={item.url}
+        />
       );
     });
 
