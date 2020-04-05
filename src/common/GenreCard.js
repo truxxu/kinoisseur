@@ -17,7 +17,7 @@ const GenreCard = ({navigation, _title, _url}) => {
     <TouchableOpacity
       style={styles.container}
       onPress={() => navigation.navigate('Genre', {_title: title})}>
-      <Image style={styles.logo} source={{uri: url}} />
+      <Image style={styles.image} source={{uri: url}} />
       <Text style={styles.text}>{title}</Text>
     </TouchableOpacity>
   );
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     textShadowRadius: 10,
   },
 
-  logo: {
+  image: {
     width: WIDTH * 0.4,
     height: 75,
     borderRadius: 20,
