@@ -10,14 +10,15 @@ import {
 const WIDTH = Dimensions.get('window').width;
 
 const GenreCard = (props) => {
-  const {navigation, _title, _url} = props;
-  let title = _title || '',
-    url = _url || '';
+  const {navigation, data} = props;
+  let title = data.name || '',
+    url = data.url || '',
+    id = data.id || '';
 
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => navigation.navigate('Genre', {_title: title})}>
+      onPress={() => navigation.navigate('Genre', {_title: title, id: id})}>
       <Image style={styles.image} source={{uri: url}} />
       <Text style={styles.text}>{title}</Text>
     </TouchableOpacity>

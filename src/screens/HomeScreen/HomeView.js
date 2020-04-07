@@ -22,14 +22,7 @@ const HomeView = (props) => {
       return <ActivityIndicator size="large" color="#ff2e63" />;
     } else {
       const cards = data.map((item, idx) => {
-        return (
-          <GenreCard
-            key={idx}
-            navigation={navigation}
-            _title={item.name}
-            _url={item.url}
-          />
-        );
+        return <GenreCard key={idx} navigation={navigation} data={item} />;
       });
 
       if (data.length % 2 === 1) {

@@ -5,8 +5,9 @@ import Navbar from '../../common/Navbar';
 import MovieCard from '../../common/MovieCard';
 
 const GenreView = (props) => {
-  const {navigation, _title} = props;
-  let title = _title || '';
+  const {navigation, _title, _movies, isloading} = props;
+  let title = _title || '',
+    movies = _movies || [];
 
   return (
     <SafeAreaView style={styles.container}>

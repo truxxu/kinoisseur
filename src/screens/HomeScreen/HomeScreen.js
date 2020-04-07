@@ -7,7 +7,7 @@ import HomeView from './HomeView';
 
 const HomeScreen = ({navigation}) => {
   const [data, setData] = useState([]),
-    [isloading, setLoad] = useState(false);
+    [isloading, setLoad] = useState(true);
 
   const fetchData = () => {
     axios
@@ -22,7 +22,6 @@ const HomeScreen = ({navigation}) => {
   };
 
   useEffect(() => {
-    setLoad(true);
     const timer = setTimeout(() => {
       fetchData();
     }, 1000);
