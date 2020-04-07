@@ -1,5 +1,12 @@
 import React from 'react';
-import {View, StyleSheet, SafeAreaView, ScrollView, Text} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  SafeAreaView,
+  Text,
+  FlatList,
+  ActivityIndicator,
+} from 'react-native';
 
 import Navbar from '../../common/Navbar';
 import MovieCard from '../../common/MovieCard';
@@ -8,6 +15,20 @@ const GenreView = (props) => {
   const {navigation, _title, _movies, isloading} = props;
   let title = _title || '',
     movies = _movies || [];
+
+  const renderMovieCards = () => {
+    if (isloading) {
+      return <ActivityIndicator size="large" color="#ff2e63" />;
+    } else {
+      return (
+        <FlatList
+          data={movies}
+          renderItem={({item}) => <MovieCard navigation={navigation} />}
+          keyExtractor={(item) => item.id.toString()}
+        />
+      );
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -18,12 +39,7 @@ const GenreView = (props) => {
             Here are some of my recommendations
           </Text>
         </View>
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={styles.scrollview}>
-          <MovieCard navigation={navigation} />
-          <MovieCard navigation={navigation} />
-        </ScrollView>
+        {renderMovieCards()}
       </View>
     </SafeAreaView>
   );
