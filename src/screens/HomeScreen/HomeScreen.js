@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   StyleSheet,
@@ -6,54 +6,63 @@ import {
   ScrollView,
   Dimensions,
   Text,
+  Alert,
+  ActivityIndicator,
 } from 'react-native';
+import axios from 'axios';
 
+import {api} from '../../../env';
 import Navbar from '../../common/Navbar';
 import GenreCard from '../../common/GenreCard';
 
 const WIDTH = Dimensions.get('window').width;
 
 const HomeScreen = ({navigation}) => {
-  const _data = [
-    {
-      title: 'Action',
-      url: 'https://i.picsum.photos/id/237/300/200.jpg',
-    },
-    {
-      title: 'Romance',
-      url: 'https://i.picsum.photos/id/200/300/200.jpg',
-    },
-    {
-      title: 'Comedy',
-      url: 'https://i.picsum.photos/id/220/300/200.jpg',
-    },
-    {
-      title: 'Sci-Fi',
-      url: 'https://i.picsum.photos/id/110/300/200.jpg',
-    },
-    {
-      title: 'Drama',
-      url: 'https://i.picsum.photos/id/222/300/200.jpg',
-    },
-  ];
-  const data = _data || [];
+  const [data, setData] = useState([]),
+    [isloading, setLoad] = useState(false);
+
+  const fetchData = () => {
+    axios
+      .get(api.liveServer + '/genres/')
+      .then((response) => {
+        setData(response.data);
+        setLoad(false);
+      })
+      .catch((error) => {
+        Alert.alert('Error', 'Please try again');
+      });
+  };
+
+  useEffect(() => {
+    setLoad(true);
+    const timer = setTimeout(() => {
+      fetchData();
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const generateCards = () => {
-    const cards = data.map((item, idx) => {
-      return (
-        <GenreCard
-          key={idx}
-          navigation={navigation}
-          _title={item.title}
-          _url={item.url}
-        />
-      );
-    });
-
-    if (data.length % 2 === 1) {
-      return cards.concat(<View key={data.length} style={styles.dummycard} />);
+    if (isloading) {
+      return <ActivityIndicator size="large" color="#ff2e63" />;
     } else {
-      return cards;
+      const cards = data.map((item, idx) => {
+        return (
+          <GenreCard
+            key={idx}
+            navigation={navigation}
+            _title={item.name}
+            _url={item.url}
+          />
+        );
+      });
+
+      if (data.length % 2 === 1) {
+        return cards.concat(
+          <View key={data.length} style={styles.dummycard} />,
+        );
+      } else {
+        return cards;
+      }
     }
   };
 
@@ -105,6 +114,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
     color: '#ff2e63',
     textAlign: 'center',
+    zIndex: 10,
   },
 });
 
