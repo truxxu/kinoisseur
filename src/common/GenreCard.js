@@ -9,7 +9,8 @@ import {
 
 const WIDTH = Dimensions.get('window').width;
 
-const GenreCard = ({navigation, _title, _url}) => {
+const GenreCard = (props) => {
+  const {navigation, _title, _url} = props;
   let title = _title || '',
     url = _url || '';
 
