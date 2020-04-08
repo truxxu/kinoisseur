@@ -23,7 +23,9 @@ const GenreView = (props) => {
       return (
         <FlatList
           data={movies}
-          renderItem={({item}) => <MovieCard navigation={navigation} />}
+          renderItem={({item}) => (
+            <MovieCard navigation={navigation} data={item} />
+          )}
           keyExtractor={(item) => item.id.toString()}
         />
       );

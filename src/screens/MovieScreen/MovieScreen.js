@@ -20,8 +20,13 @@ import netflix from '../../assets/netflix.png';
 const WIDTH = Dimensions.get('window').width;
 
 const MovieScreen = ({navigation, route}) => {
-  const {_title} = route.params;
-  let title = _title || '';
+  const {data} = route.params;
+  let title = data.title || '',
+    director = data.director || '',
+    year = data.year || '',
+    duration = data.duration || '',
+    synopsys = data.synopsys || '',
+    url = data.url || '';
 
   return (
     <SafeAreaView style={styles.container}>
@@ -30,26 +35,17 @@ const MovieScreen = ({navigation, route}) => {
         <ScrollView
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.movieInfo}>
-          <Text style={styles.title}>Movie Title (2020)</Text>
-          <Text style={styles.text}>Directed by David Lynch</Text>
-          <Text style={styles.text}>120 min</Text>
+          <Text style={styles.title}>
+            {title} ({year})
+          </Text>
+          <Text style={styles.text}>Directed by {director}</Text>
+          <Text style={styles.text}>{duration} min</Text>
           <TouchableOpacity style={styles.trailerContainer}>
-            <Image
-              style={styles.trailerImage}
-              source={{uri: 'https://i.picsum.photos/id/866/300/200.jpg'}}
-            />
+            <Image style={styles.trailerImage} source={{uri: url}} />
             <Image style={styles.playLogo} source={play} />
           </TouchableOpacity>
           <View style={styles.synopsys}>
-            <Text style={styles.text}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum'
-            </Text>
+            <Text style={styles.text}>{synopsys}</Text>
           </View>
           <View style={styles.actionsContainer}>
             <TouchableOpacity style={styles.actionButton}>
@@ -89,8 +85,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#eaeaea',
     paddingHorizontal: 20,
     paddingVertical: 10,
-    // alignItems: 'center',
-    // justifyContent: 'center',
     borderRadius: 20,
     width: WIDTH * 0.9,
     margin: 7.5,
