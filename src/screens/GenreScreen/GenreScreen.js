@@ -1,58 +1,44 @@
-import React from 'react';
-import {View, StyleSheet, SafeAreaView, ScrollView, Text} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {Alert} from 'react-native';
+import axios from 'axios';
 
-import Navbar from '../../common/Navbar';
-import MovieCard from '../../common/MovieCard';
+import {api} from '../../../env';
+import GenreView from './GenreView';
 
 const GenreScreen = ({navigation, route}) => {
-  const {_title} = route.params;
+  const {_title, id} = route.params;
   let title = _title || '';
 
+  const [data, setData] = useState([]),
+    [isloading, setLoad] = useState(true);
+
+  const fetchData = () => {
+    axios
+      .get(`${api.liveServer}/genres/${id}/movies`)
+      .then((response) => {
+        setData(response.data);
+        setLoad(false);
+      })
+      .catch((error) => {
+        Alert.alert('Error', 'Please try again');
+      });
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      fetchData();
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <SafeAreaView style={styles.container}>
-      <Navbar navigation={navigation} _title={title} _back={true} />
-      <View style={styles.content}>
-        <View style={styles.textContainer}>
-          <Text style={styles.heading}>
-            Here are some of my recommendations
-          </Text>
-        </View>
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={styles.scrollview}>
-          <MovieCard navigation={navigation} />
-          <MovieCard navigation={navigation} />
-        </ScrollView>
-      </View>
-    </SafeAreaView>
+    <GenreView
+      navigation={navigation}
+      _title={title}
+      isloading={isloading}
+      _movies={data}
+    />
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 9,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  content: {
-    flex: 8,
-    padding: 5,
-  },
-  scrollview: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-  },
-  textContainer: {
-    marginTop: 20,
-    marginBottom: 20,
-  },
-  heading: {
-    fontWeight: 'bold',
-    fontSize: 40,
-    color: '#ff2e63',
-    textAlign: 'center',
-  },
-});
 
 export default GenreScreen;

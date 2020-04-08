@@ -15,10 +15,12 @@ import heart from '../assets/heart.png';
 const WIDTH = Dimensions.get('window').width,
   HEIGHT = Dimensions.get('window').height;
 
-const MovieCard = ({navigation}) => {
-  const text =
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum';
-  const content = 'Hole';
+const MovieCard = (props) => {
+  const {navigation, data} = props;
+
+  let title = data.title || '',
+    text = data.synopsys || '',
+    rating = data.rating || 0;
 
   const shortener = (string, length) => {
     if (string.length > length - 1) {
@@ -31,12 +33,12 @@ const MovieCard = ({navigation}) => {
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => navigation.navigate('Movie', {_title: content})}>
+      onPress={() => navigation.navigate('Movie', {data: data})}>
       <View style={styles.headingContainer}>
-        <Text style={styles.title}>{shortener(content, 35)}</Text>
+        <Text style={styles.title}>{shortener(title, 35)}</Text>
         <View style={styles.ratingContainer}>
           <Image style={styles.icon} source={star} />
-          <Text style={styles.ratingText}>9.8/10</Text>
+          <Text style={styles.ratingText}>{rating}/5</Text>
           <Image style={styles.statusIcon} source={eye} />
           <Image style={styles.statusIcon} source={heart} />
           <View tyle={styles.statusContainer} />

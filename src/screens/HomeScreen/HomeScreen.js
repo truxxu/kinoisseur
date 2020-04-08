@@ -1,111 +1,34 @@
-import React from 'react';
-import {
-  View,
-  StyleSheet,
-  SafeAreaView,
-  ScrollView,
-  Dimensions,
-  Text,
-} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {Alert} from 'react-native';
+import axios from 'axios';
 
-import Navbar from '../../common/Navbar';
-import GenreCard from '../../common/GenreCard';
-
-const WIDTH = Dimensions.get('window').width;
+import {api} from '../../../env';
+import HomeView from './HomeView';
 
 const HomeScreen = ({navigation}) => {
-  const _data = [
-    {
-      title: 'Action',
-      url: 'https://i.picsum.photos/id/237/300/200.jpg',
-    },
-    {
-      title: 'Romance',
-      url: 'https://i.picsum.photos/id/200/300/200.jpg',
-    },
-    {
-      title: 'Comedy',
-      url: 'https://i.picsum.photos/id/220/300/200.jpg',
-    },
-    {
-      title: 'Sci-Fi',
-      url: 'https://i.picsum.photos/id/110/300/200.jpg',
-    },
-    {
-      title: 'Drama',
-      url: 'https://i.picsum.photos/id/222/300/200.jpg',
-    },
-  ];
-  const data = _data || [];
+  const [data, setData] = useState([]),
+    [isloading, setLoad] = useState(true);
 
-  const generateCards = () => {
-    const cards = data.map((item, idx) => {
-      return (
-        <GenreCard
-          key={idx}
-          navigation={navigation}
-          _title={item.title}
-          _url={item.url}
-        />
-      );
-    });
-
-    if (data.length % 2 === 1) {
-      return cards.concat(<View key={data.length} style={styles.dummycard} />);
-    } else {
-      return cards;
-    }
+  const fetchData = () => {
+    axios
+      .get(api.liveServer + '/genres/')
+      .then((response) => {
+        setData(response.data);
+        setLoad(false);
+      })
+      .catch((error) => {
+        Alert.alert('Error', 'Please try again');
+      });
   };
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <Navbar navigation={navigation} _title="Kinoisseur" />
-      <View style={styles.content}>
-        <View style={styles.textContainer}>
-          <Text style={styles.heading}>
-            What would you like to watch today?
-          </Text>
-        </View>
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={styles.scrollview}>
-          {generateCards()}
-        </ScrollView>
-      </View>
-    </SafeAreaView>
-  );
-};
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      fetchData();
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 9,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  content: {
-    flex: 8,
-    padding: 5,
-  },
-  scrollview: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-  },
-  dummycard: {
-    width: WIDTH * 0.4,
-    height: 75,
-    margin: 7.5,
-  },
-  textContainer: {
-    marginTop: 20,
-    marginBottom: 20,
-  },
-  heading: {
-    fontWeight: 'bold',
-    fontSize: 40,
-    color: '#ff2e63',
-    textAlign: 'center',
-  },
-});
+  return <HomeView navigation={navigation} isloading={isloading} data={data} />;
+};
 
 export default HomeScreen;
