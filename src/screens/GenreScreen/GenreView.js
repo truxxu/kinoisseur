@@ -23,6 +23,7 @@ const GenreView = (props) => {
       return (
         <FlatList
           data={movies}
+          contentContainerStyle={styles.list}
           renderItem={({item}) => (
             <MovieCard navigation={navigation} data={item} />
           )}
@@ -57,10 +58,8 @@ const styles = StyleSheet.create({
     flex: 8,
     padding: 5,
   },
-  scrollview: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
+  list: {
+    alignItems: 'center',
   },
   textContainer: {
     marginTop: 20,
