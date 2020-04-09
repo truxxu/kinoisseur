@@ -15,10 +15,6 @@ const CustomDrawer = (props) => {
         <Text style={styles.headerText}>User</Text>
       </View>
       <DrawerItemList {...props} />
-      <DrawerItem
-        label="Help"
-        // onPress={() => Linking.openUrl('https://mywebsite.com/help')}
-      />
     </DrawerContentScrollView>
   );
 };

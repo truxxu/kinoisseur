@@ -1,14 +1,8 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Dimensions,
-} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import Modal from 'react-native-modal';
 
-const WIDTH = Dimensions.get('window').width;
+import SortOption from './SortOption';
 
 const OrderModal = (props) => {
   const {showModal, setVisible} = props;
@@ -17,29 +11,13 @@ const OrderModal = (props) => {
     <Modal isVisible={showModal} onBackdropPress={() => setVisible(false)}>
       <View style={styles.modalContainer}>
         <Text style={[styles.modalText, styles.modalHeader]}>Sort by:</Text>
-        <TouchableOpacity
-          onPress={() => setVisible(false)}
-          style={styles.modalButton}>
-          <Text style={styles.modalText}>Highest score</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.modalButton}>
-          <Text style={styles.modalText}>Lowest score</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.modalButton}>
-          <Text style={styles.modalText}>Oldest first</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.modalButton}>
-          <Text style={styles.modalText}>Newest first</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.modalButton}>
-          <Text style={styles.modalText}>Longest first</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.modalButton}>
-          <Text style={styles.modalText}>Shortest first</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.modalButton}>
-          <Text style={styles.modalText}>Title A to Z</Text>
-        </TouchableOpacity>
+        <SortOption setVisible={setVisible} text="Highest score" />
+        <SortOption setVisible={setVisible} text="Lowest score" />
+        <SortOption setVisible={setVisible} text="Oldest first" />
+        <SortOption setVisible={setVisible} text="Newest first" />
+        <SortOption setVisible={setVisible} text="Longest first" />
+        <SortOption setVisible={setVisible} text="Shortest first" />
+        <SortOption setVisible={setVisible} text="Title A to Z" />
       </View>
     </Modal>
   );
@@ -54,17 +32,6 @@ const styles = StyleSheet.create({
   },
   modalHeader: {
     marginVertical: 20,
-  },
-  modalText: {
-    fontWeight: 'bold',
-    fontSize: 20,
-    color: '#ff2e63',
-    textAlign: 'center',
-  },
-  modalButton: {
-    marginVertical: 10,
-    borderColor: '#ff2e63',
-    width: WIDTH * 0.9,
   },
 });
 
