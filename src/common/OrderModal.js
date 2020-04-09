@@ -1,36 +1,44 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import React from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native';
 import Modal from 'react-native-modal';
 
+const WIDTH = Dimensions.get('window').width;
+
 const OrderModal = (props) => {
-  const {showModal} = props,
-    [isVisible, setVisible] = useState(true);
-  let show = showModal && isVisible;
+  const {showModal, setVisible} = props;
 
   return (
-    <Modal isVisible={show}>
-      <View style={{backgroundColor: 'white'}}>
-        <Text>Sort by:</Text>
-        <TouchableOpacity>
-          <Text>Highest score</Text>
+    <Modal isVisible={showModal} onBackdropPress={() => setVisible(false)}>
+      <View style={styles.modalContainer}>
+        <Text style={[styles.modalText, styles.modalHeader]}>Sort by:</Text>
+        <TouchableOpacity
+          onPress={() => setVisible(false)}
+          style={styles.modalButton}>
+          <Text style={styles.modalText}>Highest score</Text>
         </TouchableOpacity>
-        <TouchableOpacity>
-          <Text>Lowest score</Text>
+        <TouchableOpacity style={styles.modalButton}>
+          <Text style={styles.modalText}>Lowest score</Text>
         </TouchableOpacity>
-        <TouchableOpacity>
-          <Text>Oldest first</Text>
+        <TouchableOpacity style={styles.modalButton}>
+          <Text style={styles.modalText}>Oldest first</Text>
         </TouchableOpacity>
-        <TouchableOpacity>
-          <Text>Newest first</Text>
+        <TouchableOpacity style={styles.modalButton}>
+          <Text style={styles.modalText}>Newest first</Text>
         </TouchableOpacity>
-        <TouchableOpacity>
-          <Text>Longest first</Text>
+        <TouchableOpacity style={styles.modalButton}>
+          <Text style={styles.modalText}>Longest first</Text>
         </TouchableOpacity>
-        <TouchableOpacity>
-          <Text>Shortest first</Text>
+        <TouchableOpacity style={styles.modalButton}>
+          <Text style={styles.modalText}>Shortest first</Text>
         </TouchableOpacity>
-        <TouchableOpacity>
-          <Text>Title A to Z</Text>
+        <TouchableOpacity style={styles.modalButton}>
+          <Text style={styles.modalText}>Title A to Z</Text>
         </TouchableOpacity>
       </View>
     </Modal>
@@ -38,9 +46,25 @@ const OrderModal = (props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  modalContainer: {
+    backgroundColor: 'white',
+    borderRadius: 20,
+    paddingHorizontal: 20,
     alignItems: 'center',
-    justifyContent: 'center',
+  },
+  modalHeader: {
+    marginVertical: 20,
+  },
+  modalText: {
+    fontWeight: 'bold',
+    fontSize: 20,
+    color: '#ff2e63',
+    textAlign: 'center',
+  },
+  modalButton: {
+    marginVertical: 10,
+    borderColor: '#ff2e63',
+    width: WIDTH * 0.9,
   },
 });
 
