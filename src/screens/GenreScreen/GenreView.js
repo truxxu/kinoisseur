@@ -20,8 +20,6 @@ const GenreView = (props) => {
     [isVisible, setVisible] = useState(false),
     [page, setPage] = useState({num: 1});
 
-  console.log(page.num);
-
   let title = _title || '',
     movies = _movies || [];
 

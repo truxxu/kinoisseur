@@ -14,8 +14,9 @@ const GenreScreen = ({navigation, route}) => {
     [bottom, setBottom] = useState(false);
 
   const fetchData = (pageNum) => {
+    const url = `${api.liveServer}/genres/${id}/movies?page=${pageNum}&sort=rating&order=DESC`;
     axios
-      .get(`${api.liveServer}/genres/${id}/movies?page=${pageNum}`)
+      .get(url)
       .then((response) => {
         response.data.length === 0
           ? setBottom(true)
