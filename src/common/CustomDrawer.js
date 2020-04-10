@@ -3,7 +3,6 @@ import {StyleSheet, View, Text, Image} from 'react-native';
 import {
   DrawerContentScrollView,
   DrawerItemList,
-  DrawerItem,
 } from '@react-navigation/drawer';
 import logo from '../assets/account.png';
 
@@ -15,10 +14,6 @@ const CustomDrawer = (props) => {
         <Text style={styles.headerText}>User</Text>
       </View>
       <DrawerItemList {...props} />
-      <DrawerItem
-        label="Help"
-        // onPress={() => Linking.openUrl('https://mywebsite.com/help')}
-      />
     </DrawerContentScrollView>
   );
 };

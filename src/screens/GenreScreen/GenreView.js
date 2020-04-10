@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   StyleSheet,
@@ -6,15 +6,26 @@ import {
   Text,
   FlatList,
   ActivityIndicator,
+  TouchableOpacity,
+  Image,
 } from 'react-native';
 
 import Navbar from '../../common/Navbar';
 import MovieCard from '../../common/MovieCard';
+import OrderModal from '../../common/OrderModal';
+import sort2 from '../../assets/sort2.png';
 
 const GenreView = (props) => {
-  const {navigation, _title, _movies, isloading} = props;
+  const {navigation, _title, _movies, isloading, fetchData, bottom} = props,
+    [isVisible, setVisible] = useState(false),
+    [page, setPage] = useState({num: 1});
+
   let title = _title || '',
     movies = _movies || [];
+
+  const pageCount = () => {
+    setPage({...page, num: page.num + 1});
+  };
 
   const renderMovieCards = () => {
     if (isloading) {
@@ -23,10 +34,18 @@ const GenreView = (props) => {
       return (
         <FlatList
           data={movies}
+          contentContainerStyle={styles.list}
           renderItem={({item}) => (
             <MovieCard navigation={navigation} data={item} />
           )}
-          keyExtractor={(item) => item.id.toString()}
+          keyExtractor={(item, index) => index.toString()}
+          onEndReached={() => {
+            if (!bottom) {
+              pageCount();
+              fetchData(page.num);
+            }
+          }}
+          onEndReachedThreshold={0.5}
         />
       );
     }
@@ -35,11 +54,15 @@ const GenreView = (props) => {
   return (
     <SafeAreaView style={styles.container}>
       <Navbar navigation={navigation} _title={title} _back={true} />
+      <OrderModal showModal={isVisible} setVisible={setVisible} />
       <View style={styles.content}>
         <View style={styles.textContainer}>
           <Text style={styles.heading}>
             Here are some of my recommendations
           </Text>
+          <TouchableOpacity onPress={() => setVisible(!isVisible)}>
+            <Image style={styles.icon} source={sort2} />
+          </TouchableOpacity>
         </View>
         {renderMovieCards()}
       </View>
@@ -57,10 +80,8 @@ const styles = StyleSheet.create({
     flex: 8,
     padding: 5,
   },
-  scrollview: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
+  list: {
+    alignItems: 'center',
   },
   textContainer: {
     marginTop: 20,
@@ -71,6 +92,12 @@ const styles = StyleSheet.create({
     fontSize: 40,
     color: '#ff2e63',
     textAlign: 'center',
+  },
+  icon: {
+    marginTop: 10,
+    alignSelf: 'center',
+    height: 25,
+    width: 25,
   },
 });
 

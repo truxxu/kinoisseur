@@ -10,13 +10,17 @@ const GenreScreen = ({navigation, route}) => {
   let title = _title || '';
 
   const [data, setData] = useState([]),
-    [isloading, setLoad] = useState(true);
+    [isloading, setLoad] = useState(true),
+    [bottom, setBottom] = useState(false);
 
-  const fetchData = () => {
+  const fetchData = (pageNum) => {
+    const url = `${api.liveServer}/genres/${id}/movies?page=${pageNum}&sort=rating&order=DESC`;
     axios
-      .get(`${api.liveServer}/genres/${id}/movies`)
+      .get(url)
       .then((response) => {
-        setData(response.data);
+        response.data.length === 0
+          ? setBottom(true)
+          : setData(data.concat(response.data));
         setLoad(false);
       })
       .catch((error) => {
@@ -26,7 +30,7 @@ const GenreScreen = ({navigation, route}) => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      fetchData();
+      fetchData(1);
     }, 1000);
     return () => clearTimeout(timer);
   }, []);
@@ -37,6 +41,8 @@ const GenreScreen = ({navigation, route}) => {
       _title={title}
       isloading={isloading}
       _movies={data}
+      fetchData={fetchData}
+      bottom={bottom}
     />
   );
 };

@@ -11,11 +11,8 @@ import {
 } from 'react-native';
 
 import Navbar from '../../common/Navbar';
+import ActionButton from '../../common/ActionButton';
 import play from '../../assets/play.png';
-import heart from '../../assets/heart.png';
-import eye from '../../assets/eye.png';
-import share from '../../assets/share.png';
-import netflix from '../../assets/netflix.png';
 
 const WIDTH = Dimensions.get('window').width;
 
@@ -48,22 +45,10 @@ const MovieScreen = ({navigation, route}) => {
             <Text style={styles.text}>{synopsys}</Text>
           </View>
           <View style={styles.actionsContainer}>
-            <TouchableOpacity style={styles.actionButton}>
-              <Image style={styles.buttonLogo} source={heart} />
-              <Text style={styles.buttonText}>Add to Favourites</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.actionButton}>
-              <Image style={styles.buttonLogo} source={eye} />
-              <Text style={styles.buttonText}>Add to Watchlist</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.actionButton}>
-              <Image style={styles.buttonLogo} source={share} />
-              <Text style={styles.buttonText}>Share</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.actionButton}>
-              <Image style={styles.buttonLogo} source={netflix} />
-              <Text style={styles.buttonText}>Watch on Netflix</Text>
-            </TouchableOpacity>
+            <ActionButton type="favourite" />
+            <ActionButton type="watchlist" />
+            <ActionButton type="share" />
+            <ActionButton type="netflix" />
           </View>
         </ScrollView>
       </View>
@@ -128,25 +113,6 @@ const styles = StyleSheet.create({
   },
   actionsContainer: {
     marginVertical: 20,
-  },
-  actionButton: {
-    flexDirection: 'row',
-    backgroundColor: '#ff2e63',
-    padding: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 10,
-    marginBottom: 15,
-  },
-  buttonText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#eaeaea',
-    marginLeft: 15,
-  },
-  buttonLogo: {
-    height: 20,
-    width: 20,
   },
 });
 

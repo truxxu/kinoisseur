@@ -9,8 +9,6 @@ import {
 } from 'react-native';
 
 import star from '../assets/star.png';
-import eye from '../assets/eye.png';
-import heart from '../assets/heart.png';
 
 const WIDTH = Dimensions.get('window').width,
   HEIGHT = Dimensions.get('window').height;
@@ -35,12 +33,10 @@ const MovieCard = (props) => {
       style={styles.container}
       onPress={() => navigation.navigate('Movie', {data: data})}>
       <View style={styles.headingContainer}>
-        <Text style={styles.title}>{shortener(title, 35)}</Text>
+        <Text style={styles.title}>{shortener(title, 30)}</Text>
         <View style={styles.ratingContainer}>
           <Image style={styles.icon} source={star} />
           <Text style={styles.ratingText}>{rating}/5</Text>
-          <Image style={styles.statusIcon} source={eye} />
-          <Image style={styles.statusIcon} source={heart} />
           <View tyle={styles.statusContainer} />
           <View style={styles.statusContainer} />
         </View>
