@@ -16,11 +16,18 @@ import OrderModal from '../../common/OrderModal';
 import sort2 from '../../assets/sort2.png';
 
 const GenreView = (props) => {
-  const {navigation, _title, _movies, isloading} = props,
-    [isVisible, setVisible] = useState(false);
+  const {navigation, _title, _movies, isloading, fetchData} = props,
+    [isVisible, setVisible] = useState(false),
+    [page, setPage] = useState({num: 1});
+
+  console.log(page.num);
 
   let title = _title || '',
     movies = _movies || [];
+
+  const pageCount = () => {
+    setPage({...page, num: page.num + 1});
+  };
 
   const renderMovieCards = () => {
     if (isloading) {
@@ -33,7 +40,12 @@ const GenreView = (props) => {
           renderItem={({item}) => (
             <MovieCard navigation={navigation} data={item} />
           )}
-          keyExtractor={(item) => item.id.toString()}
+          keyExtractor={(item, index) => index.toString()}
+          onEndReached={() => {
+            pageCount();
+            fetchData(page.num);
+          }}
+          onEndReachedThreshold={0.5}
         />
       );
     }

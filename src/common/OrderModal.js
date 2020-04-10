@@ -33,6 +33,12 @@ const styles = StyleSheet.create({
   modalHeader: {
     marginVertical: 20,
   },
+  modalText: {
+    fontWeight: 'bold',
+    fontSize: 20,
+    color: '#ff2e63',
+    textAlign: 'center',
+  },
 });
 
 export default OrderModal;

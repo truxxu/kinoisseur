@@ -33,7 +33,7 @@ const MovieCard = (props) => {
       style={styles.container}
       onPress={() => navigation.navigate('Movie', {data: data})}>
       <View style={styles.headingContainer}>
-        <Text style={styles.title}>{shortener(title, 35)}</Text>
+        <Text style={styles.title}>{shortener(title, 30)}</Text>
         <View style={styles.ratingContainer}>
           <Image style={styles.icon} source={star} />
           <Text style={styles.ratingText}>{rating}/5</Text>

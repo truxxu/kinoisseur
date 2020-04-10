@@ -3,7 +3,6 @@ import {StyleSheet, View, Text, Image} from 'react-native';
 import {
   DrawerContentScrollView,
   DrawerItemList,
-  DrawerItem,
 } from '@react-navigation/drawer';
 import logo from '../assets/account.png';
 
