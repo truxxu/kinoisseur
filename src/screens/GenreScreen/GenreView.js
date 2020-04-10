@@ -16,7 +16,7 @@ import OrderModal from '../../common/OrderModal';
 import sort2 from '../../assets/sort2.png';
 
 const GenreView = (props) => {
-  const {navigation, _title, _movies, isloading, fetchData} = props,
+  const {navigation, _title, _movies, isloading, fetchData, bottom} = props,
     [isVisible, setVisible] = useState(false),
     [page, setPage] = useState({num: 1});
 
@@ -42,8 +42,10 @@ const GenreView = (props) => {
           )}
           keyExtractor={(item, index) => index.toString()}
           onEndReached={() => {
-            pageCount();
-            fetchData(page.num);
+            if (!bottom) {
+              pageCount();
+              fetchData(page.num);
+            }
           }}
           onEndReachedThreshold={0.5}
         />
